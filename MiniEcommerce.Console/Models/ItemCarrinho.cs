@@ -4,7 +4,7 @@ public class ItemCarrinho
 {
     public Produto Produto { get; }
     public int Quantidade { get; private set; }
-    public decimal Subtotal => throw new NotImplementedException();
+    public decimal Subtotal => Produto.Preco * Quantidade;
 
     public ItemCarrinho(Produto produto, int quantidade)
     {
@@ -12,5 +12,5 @@ public class ItemCarrinho
         Quantidade = quantidade;
     }
 
-    internal void AumentarQuantidade(int quantidade) => throw new NotImplementedException();
+    internal void AumentarQuantidade(int quantidade) => Quantidade += quantidade;
 }
