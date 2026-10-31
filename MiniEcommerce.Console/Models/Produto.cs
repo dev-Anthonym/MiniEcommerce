@@ -22,5 +22,14 @@ public class Produto
         Estoque = estoque;
     }
 
-    internal void BaixarEstoque(int quantidade) => throw new NotImplementedException();
+        internal void BaixarEstoque(int quantidade)
+    {
+        if (quantidade <= 0)
+            throw new ArgumentException("A quantidade deve ser maior que zero.", nameof(quantidade));
+
+        if (quantidade > Estoque)
+            throw new InvalidOperationException($"Estoque insuficiente para '{Nome}'.");
+
+        Estoque -= quantidade;
+    }
 }
