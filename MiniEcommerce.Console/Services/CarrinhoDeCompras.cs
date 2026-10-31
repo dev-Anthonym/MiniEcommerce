@@ -1,4 +1,4 @@
-namespace MiniEcommerce.Console.Models;
+namespace MiniEcommerce.Console.Services;
 
 public class CarrinhoDeCompras
 {

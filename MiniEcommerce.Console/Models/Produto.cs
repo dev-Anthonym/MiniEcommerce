@@ -22,7 +22,7 @@ public class Produto
         Estoque = estoque;
     }
 
-        internal void BaixarEstoque(int quantidade)
+    internal void BaixarEstoque(int quantidade)
     {
         if (quantidade <= 0)
             throw new ArgumentException("A quantidade deve ser maior que zero.", nameof(quantidade));
