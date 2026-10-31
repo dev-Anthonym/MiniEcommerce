@@ -1,0 +1,92 @@
+# 🛒 MiniEcommerce
+
+Aplicação de console em .NET que simula um pequeno e-commerce, desenvolvida com **TDD** (Test-Driven Development), testes unitários com **xUnit** e histórico de commits no padrão **Conventional Commits**.
+
+Projeto da disciplina **Garantia da Qualidade de Software / Gestão e Qualidade de Software** — Ânima Educação.
+
+## ✨ Funcionalidades
+
+- **Cadastro de produtos** com nome, preço e quantidade em estoque (sem preço negativo, estoque negativo ou nome vazio/duplicado).
+- **Catálogo** com a lista de produtos, preços e estoques atuais.
+- **Carrinho de compras**: adicionar e remover itens, com verificação de estoque disponível e cálculo de subtotal.
+- **Checkout**: finaliza o pedido, dá baixa no estoque e gera o resumo financeiro.
+
+## 🧱 Arquitetura
+
+```
+MiniEcommerce/
+├── MiniEcommerce.Console/           # Aplicação
+│   ├── Models/                      # Entidades do domínio
+│   │   ├── Produto.cs               # Produto com validações e baixa de estoque
+│   │   ├── ItemCarrinho.cs          # Produto + quantidade dentro do carrinho
+│   │   ├── ItemPedido.cs            # Registro do item no momento da compra
+│   │   └── Pedido.cs                # Fechamento do pedido (checkout)
+│   ├── Services/                    # Classes que gerenciam coleções
+│   │   ├── Catalogo.cs              # Cadastro e busca de produtos
+│   │   └── CarrinhoDeCompras.cs     # Itens, subtotal e verificação de estoque
+│   ├── GlobalUsings.cs              # Namespaces compartilhados no projeto
+│   └── Program.cs                   # Menu interativo
+└── MiniEcommerce.Tests/             # Testes unitários (xUnit)
+    ├── ProdutoTests.cs
+    ├── CatalogoTests.cs
+    ├── CarrinhoDeComprasTests.cs
+    ├── PedidoTests.cs
+    └── GlobalUsings.cs
+```
+
+### Decisões de projeto
+
+- **Validação no construtor**: um `Produto` inválido nunca chega a existir.
+- **O carrinho só verifica o estoque, não o reduz**: a baixa acontece apenas no checkout, pois o cliente pode desistir ou remover itens antes.
+- **Checkout em duas etapas**: primeiro o estoque de *todos* os itens é conferido e só depois é baixado. Se um item não tiver estoque suficiente, nenhum produto é alterado.
+- **O `ItemPedido` guarda o preço da compra**: alterações futuras no preço não afetam pedidos já finalizados.
+
+## ▶️ Como executar
+
+Pré-requisito: [.NET SDK 10](https://dotnet.microsoft.com/download) ou superior.
+
+```bash
+git clone https://github.com/dev-Anthonym/MiniEcommerce.git
+cd MiniEcommerce
+dotnet run --project MiniEcommerce.Console/MiniEcommerce.Console.csproj
+```
+
+O sistema já inicia com alguns produtos de exemplo (Teclado, Mouse e Monitor).
+
+### Menu
+
+```
+1 - Cadastrar produto
+2 - Listar catálogo
+3 - Adicionar ao carrinho
+4 - Remover do carrinho
+5 - Ver carrinho
+6 - Finalizar pedido
+0 - Sair
+```
+
+## 🧪 Como rodar os testes
+
+```bash
+dotnet test
+```
+
+São 33 testes cobrindo validação de produtos, catálogo, carrinho e checkout.
+
+## 📝 Padrão de commits
+
+O projeto segue o [Conventional Commits](https://www.conventionalcommits.org/pt-br/), e cada etapa foi feita no ciclo do TDD:
+
+1. `test(...)`: testes escritos antes da implementação (falhando).
+2. `feat(...)`: implementação que faz os testes passarem.
+
+Para ver o histórico:
+
+```bash
+git log --oneline
+```
+
+## 👤 Autor
+
+Anthony — [GitHub](https://github.com/dev-Anthonym)
+Guilherme — [GitHub](https://github.com/guilherme-navais)
