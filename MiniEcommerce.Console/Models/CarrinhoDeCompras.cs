@@ -35,6 +35,8 @@ public class CarrinhoDeCompras
         _itens.Remove(item);
     }
 
+    public void Limpar() => throw new NotImplementedException();
+
     private ItemCarrinho? BuscarItem(string nome) =>
         _itens.FirstOrDefault(i =>
             i.Produto.Nome.Equals(nome?.Trim(), StringComparison.OrdinalIgnoreCase));

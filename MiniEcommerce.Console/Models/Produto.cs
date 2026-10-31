@@ -21,4 +21,6 @@ public class Produto
         Preco = preco;
         Estoque = estoque;
     }
+
+    internal void BaixarEstoque(int quantidade) => throw new NotImplementedException();
 }
